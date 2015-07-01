@@ -1,11 +1,55 @@
 $(document).ready(function() {
 
-	//Цели для Яндекс.Метрики и Google Analytics
-	$(".count_element").on("click", (function() {
-		ga("send", "event", "goal", "goal");
-		yaCounterXXXXXXXX.reachGoal("goal");
-		return true;
-	}));
+	function heightDetect() {
+		$("header").css("min-height", $(window).height());
+	};
+	heightDetect();
+	$(window).resize(function() {
+		heightDetect();
+	});
+
+
+	$(".tab_item").not(":first").hide();
+	$(".wrapper .tab").click(function() {
+	$(".wrapper .tab").removeClass("active").eq($(this).index()).addClass("active");
+	$(".tab_item").hide().eq($(this).index()).fadeIn()
+	}).eq(0).addClass("active");
+
+	$(".tab_item2").not(":first").hide();
+	$(".wrapper-2 .tab").click(function() {
+	$(".wrapper-2 .tab").removeClass("active").eq($(this).index()).addClass("active");
+	$(".tab_item2").hide().eq($(this).index()).fadeIn()
+	}).eq(0).addClass("active");
+
+	$(".tab_item3").not(":first").hide();
+	$(".wrapper-3 .tab").click(function() {
+	$(".wrapper-3 .tab").removeClass("active").eq($(this).index()).addClass("active");
+	$(".tab_item3").hide().eq($(this).index()).fadeIn()
+	}).eq(0).addClass("active");
+
+	$(".tab_item4").not(":first").hide();
+	$(".wrapper-4 .tab").click(function() {
+	$(".wrapper-4 .tab").removeClass("active").eq($(this).index()).addClass("active");
+	$(".tab_item4").hide().eq($(this).index()).fadeIn()
+	}).eq(0).addClass("active");
+
+	var owl = $('.owl-carousel');
+	 $(".owl-carousel").owlCarousel({
+		 	loop:true,
+	    	margin:10,
+	    	items:1,
+	    	responsiveClass:true,
+	    	center:true,
+	    	nav: true,
+	    	navText: '',
+	    	responsive:{
+	    		0:{
+		            items:1,
+		            nav:true
+		        }
+	    	}
+    	}		
+    );
 
 	//SVG Fallback
 	if(!Modernizr.svg) {
@@ -16,7 +60,8 @@ $(document).ready(function() {
 
 	//Аякс отправка форм
 	//Документация: http://api.jquery.com/jquery.ajax/
-	$("#form").submit(function() {
+	$("#form").submit(function(e) {
+		e.preventDefault;
 		$.ajax({
 			type: "POST",
 			url: "mail.php",
@@ -24,39 +69,9 @@ $(document).ready(function() {
 		}).done(function() {
 			alert("Спасибо за заявку!");
 			setTimeout(function() {
-				
-				$("#form").trigger("reset");
+				$.fancybox.close();
 			}, 1000);
 		});
-		return false;
 	});
-
-	//Chrome Smooth Scroll
-	try {
-		$.browserSelector();
-		if($("html").hasClass("chrome")) {
-			$.smoothScroll();
-		}
-	} catch(err) {
-
-	};
-
-	$("img, a").on("dragstart", function(event) { event.preventDefault(); });
-
+	
 });
-
-
-var imgs = ["img/slider/1.jpg","img/slider/2.jpg", "img/slider/3.jpg", "img/slider/4.jpg", "img/slider/5.jpg"];
-var n=0;
-var time=800;
-play=setInterval("chgImg(0)", 5000);
-
-function chgImg(number) {
-if (number!=0) n=number-2;
- $('#slide_show').fadeOut(time, function() {    //для картинок
-  $(this).attr('src', imgs[n]).fadeIn(time);
- });
- n++;
-if (n>=imgs.length) n=0;
-};
-    
