@@ -142,6 +142,7 @@ $(function() {
 
 	//E-mail Ajax Send
 	//Documentation & Example: https://github.com/agragregra/uniMail
+	/*
 	$("#form").submit(function() { //Change
 		var th = $(this);
 		$.ajax({
@@ -159,12 +160,12 @@ $(function() {
 		});
 		return false;
 	});
-
+	*/
 	//check form name
 	$('a[href=#form]').click(function(){
 		$('#form .formname').val($(this).data('form'));
 	});
-
+	
 	//Chrome Smooth Scroll
 	try {
 		$.browserSelector();
